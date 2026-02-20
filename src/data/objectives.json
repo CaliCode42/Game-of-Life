@@ -1,0 +1,6 @@
+[
+  { "id": 1, "title": "Sport", "type": "small", "xp": 5, "coins": 5 },
+  { "id": 2, "title": "Lecture", "type": "small", "xp": 5, "coins": 5 },
+  { "id": 3, "title": "Travail profond (2h)", "type": "small", "xp": 5, "coins": 5 },
+  { "id": 4, "title": "Finir CPP07", "type": "big", "xp": 20, "coins": 20 }
+]
