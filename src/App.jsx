@@ -1,22 +1,80 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home";
+import Home from "./pages/Home"
 import DailyTasks from "./pages/DailyTasks"
 import RewardShop from "./pages/RewardShop"
 
 function App() {
+
+  const [coins, setCoins] = useState(() => {
+    const saved = localStorage.getItem("lifeRPG_coins")
+    return saved ? Number(saved) : 0
+  })
+
+  const [totalXp, setTotalXp] = useState(() => {
+    const saved = localStorage.getItem("lifeRPG_totalXp")
+    return saved ? Number(saved) : 0
+  })
+
+  const [streak, setStreak] = useState(() => {
+    const saved = localStorage.getItem("lifeRPG_streak")
+    return saved ? Number(saved) : 0
+  })
+
+  const [bestStreak, setBestStreak] = useState(() => {
+    const saved = localStorage.getItem("lifeRPG_bestStreak")
+    return saved ? Number(saved) : 0
+  })
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/tasks" element={<DailyTasks />} />
-        <Route path="/shop" element={<RewardShop />} />
+
+        <Route
+          path="/"
+          element={
+            <Home
+              coins={coins}
+              totalXp={totalXp}
+              streak={streak}
+              bestStreak={bestStreak}
+            />
+          }
+        />
+
+        <Route
+          path="/tasks"
+          element={
+            <DailyTasks
+              coins={coins}
+              setCoins={setCoins}
+              totalXp={totalXp}
+              setTotalXp={setTotalXp}
+              streak={streak}
+              setStreak={setStreak}
+              bestStreak={bestStreak}
+              setBestStreak={setBestStreak}
+            />
+          }
+        />
+
+        <Route
+          path="/shop"
+          element={
+            <RewardShop
+              coins={coins}
+              setCoins={setCoins}
+              totalXp={totalXp}
+              streak={streak}
+              bestStreak={bestStreak}
+            />
+          }
+        />
+
       </Routes>
     </Router>
   )
 }
 
-export default App;
+export default App

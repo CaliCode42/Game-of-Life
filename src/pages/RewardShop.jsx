@@ -1,8 +1,11 @@
 import { useState } from "react";
 import rewardsData from "../data/rewards.json";
 
-export default function RewardShop({ coins, setCoins }) {
+export default function RewardShop({ coins, setCoins, totalXp, streak, bestStreak }) {
   const [rewards, setRewards] = useState(rewardsData);
+
+  const xpPerLevel = 100;
+  const level = Math.floor(totalXp / xpPerLevel) + 1;
 
   const buyReward = (reward) => {
     if (coins >= reward.cost) {
@@ -14,6 +17,23 @@ export default function RewardShop({ coins, setCoins }) {
   };
 
   return (
+	<>
+	<div
+	  style={{
+		background: "#1e1e1e",
+		color: "white",
+		padding: 15,
+		borderRadius: 12,
+		marginBottom: 20
+	  }}
+	>
+	  <h2>👤 Profil</h2>
+	  <p>🎖 Niveau : {level}</p>
+	  <p>💰 Coins : {coins}</p>
+	  <p>🔥 Streak : {streak}</p>
+	  <p>🏆 Record : {bestStreak}</p>
+	</div>
+
     <div style={{ marginTop: 30 }}>
       <h2>Boutique</h2>
 
@@ -32,5 +52,6 @@ export default function RewardShop({ coins, setCoins }) {
         </div>
       ))}
     </div>
+	</>
   );
 }

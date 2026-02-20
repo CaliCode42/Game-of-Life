@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom"
 
-export default function Home({ coins, setCoins, totalXp, level, streak, bestStreak }) {
+export default function Home({ coins, setCoins, totalXp, streak, bestStreak }) {
   const navigate = useNavigate()
+
+  const xpPerLevel = 100;
+  const level = Math.floor(totalXp / xpPerLevel) + 1;
 
   return (
     <div style={{ maxWidth: 500, margin: "auto" }}>

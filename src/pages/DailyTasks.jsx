@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
 import objectives from "../data/objectives.json";
 
-export default function DailyTasks({ coins, setCoins }) {
+export default function DailyTasks({
+  coins,
+  setCoins,
+  totalXp,
+  setTotalXp,
+  streak,
+  setStreak,
+  bestStreak,
+  setBestStreak
+}) {
+
   const [tasks, setTasks] = useState(() => {
   const saved = localStorage.getItem("lifeRPG_tasks")
   return saved ? JSON.parse(saved) : objectives
-})
-
-  const [totalXp, setTotalXp] = useState(() => {
-  const saved = localStorage.getItem("lifeRPG_totalXp")
-  return saved ? Number(saved) : 0
-})
-
-const [streak, setStreak] = useState(() => {
-  const saved = localStorage.getItem("lifeRPG_streak")
-  return saved ? Number(saved) : 0
-})
-
-const [bestStreak, setBestStreak] = useState(() => {
-  const saved = localStorage.getItem("lifeRPG_bestStreak")
-  return saved ? Number(saved) : 0
 })
 
 const today = new Date().toDateString()
@@ -46,7 +41,7 @@ const getStreakBonus = () => {
   if (streak >= 3) return 1
   return 0
 }
-  const xpPerLevel = 10;
+  const xpPerLevel = 100;
   
   // Calcul automatique du niveau
   const level = Math.floor(totalXp / xpPerLevel) + 1
@@ -89,9 +84,10 @@ const getStreakBonus = () => {
   useEffect(() => {
   localStorage.setItem("lifeRPG_tasks", JSON.stringify(tasks))
   localStorage.setItem("lifeRPG_totalXp", totalXp)
+  localStorage.setItem("lifeRPG_coins", coins)
   localStorage.setItem("lifeRPG_streak", streak)
   localStorage.setItem("lifeRPG_bestStreak", bestStreak)
-}, [tasks, totalXp, streak, bestStreak])
+}, [totalXp, coins, streak, bestStreak])
 
 return (
   <>
