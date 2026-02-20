@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "../styles/DailyTasks.css";
 
 export default function DailyTasks({
   coins,
@@ -87,82 +88,155 @@ const getStreakBonus = () => {
 
 return (
   <>
-	<div
-	  style={{
-		background: "#1e1e1e",
-		color: "aqua",
-		fontWeight: "bold",
-		padding: 1,
-		borderRadius: 12,
-		marginBottom: 5
-	  }}
-	>
-	  <h2>🏅 Niveau : {level}</h2>
-	</div>
+    <div
+      style={{
+        background: "#1e1e1e",
+        color: "white",
+        padding: 15,
+        borderRadius: 12,
+        marginBottom: 20,
+        textAlign: "center"
+      }}
+    >
+      <h2>🎖 Niveau : {level}</h2>
+      <p>💰 Coins : {coins}</p>
+      <div
+        style={{
+          background: "#ddd",
+          height: 22,
+          borderRadius: 12,
+          overflow: "hidden",
+          marginTop: 10
+        }}
+      >
+        <div
+          style={{
+            height: "100%",
+            width: `${(currentXp / xpPerLevel) * 100}%`,
+            background: "linear-gradient(90deg, #4caf50, #8bc34a)",
+            transition: "0.4s"
+          }}
+        />
+      </div>
+      <p style={{ fontWeight: "bold", marginTop: 5 }}>
+        XP : {currentXp} / {xpPerLevel}
+      </p>
+    </div>
+    <div style={{ marginTop: 30 }}>
+      <h2>Quêtes du jour</h2>
+      <p>
+        {tasks.every(t => t.done)
+          ? "🔥 Journée parfaite !"
+          : tasks.filter(t => t.done).length > 0
+          ? "Continue comme ça 💪"
+          : "Commence une quête pour lancer ta journée"}
+      </p>
+      <p>
+        ✅ {tasks.filter(t => t.done).length} / {tasks.length} complétées
+      </p>
 
-	<div
-	  style={{
-		background: "#ddd",
-		height: 22,
-		borderRadius: 12,
-		overflow: "hidden",
-		marginBottom: 10
-	  }}>
-	<div
-	  style={{
-		height: "100%",
-		width: `${(currentXp / xpPerLevel) * 100}%`,
-		background: "linear-gradient(90deg, #4caf50, #8bc34a)",
-		transition: "0.4s"
-	  }} />
-		</div>
+      <div style={{ marginBottom: 30 }}>
+        <h3>Petites quêtes</h3>
+        <div className="tasks-grid">
+          {tasks.filter(task => task.type === "small").map((task) => {
+            const borderColor = "#2196f3"; // blue for small
+            return (
+              <div
+                key={task.id}
+                style={{
+                  padding: 12,
+                  borderRadius: 10,
+                  background: task.done ? "#4caf50" : "#2a2a2a",
+                  color: "white",
+                  borderLeft: `6px solid ${task.done ? "#8bc34a" : borderColor}`,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+                  transition: "0.2s"
+                }}
+              >
+                <div style={{ flex: 1 }}>
+                  <strong>{task.title}</strong>
+                  <div style={{ fontSize: 12, marginTop: 4 }}>
+                    💰 +{task.coins} coins | ⭐ +{task.xp} XP
+                  </div>
+                </div>
+                <button
+                  onClick={() => toggleTask(task.id)}
+                  style={{
+                    alignSelf: "flex-start",
+                    border: "none",
+                    background: "transparent",
+                    fontSize: 18,
+                    cursor: "pointer",
+                    width: 30,
+                    padding: 4,
+                    color: "white",
+                    marginTop: 8
+                  }}
+                  onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
+                  onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
+                >
+                  {task.done ? "✅" : "⬜"}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
-	<p style={{ fontWeight: "bold" }}>
-	  XP : {currentXp} / {xpPerLevel}
-	</p>
-	<h2>Quêtes du jour</h2>
-	<p>
-	  {tasks.every(t => t.done)
-    	? "🔥 Journée parfaite !"
-    	: tasks.filter(t => t.done).length > 0
-    	? "Continue comme ça 💪"
-    	: "Commence une quête pour lancer ta journée"}
-	</p>
-	<p>
-	  ✅ {tasks.filter(t => t.done).length} / {tasks.length} complétées
-	</p>
-	{tasks.map((task) => (
-	  <div 
-		key={task.id}
-		style={{
-			marginBottom: 5,
-			padding: 12,
-			borderRadius: 8,
-			background: task.done ? "#6cb87d" : "#8b8383",
-			transition: "0.2s",
-			display: "flex",
-      		alignItems: "center",   // center vertically
-    		gap: 12                 // space between button and text
-			}}
-	  >
-	  <button
-		onClick={() => toggleTask(task.id)}
-		style={{
-			border: "none",
-			background: "transparent",
-			fontSize: 18,
-			cursor: "pointer",
-			width: 30,
-			padding: 4,
-		}}
-		onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
-		onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
-	  >
-		{task.done ? "✅" : "⬜"}
-	  </button>
-	    {task.title} ({task.xp} XP / {task.coins} coins)
-	  </div>
-	))}
+      <div>
+        <h3>Grandes quêtes</h3>
+        <div className="tasks-grid">
+          {tasks.filter(task => task.type === "big").map((task) => {
+            const borderColor = "#ff9800"; // orange for big
+            return (
+              <div
+                key={task.id}
+                style={{
+                  padding: 12,
+                  borderRadius: 10,
+                  background: task.done ? "#4caf50" : "#2a2a2a",
+                  color: "white",
+                  borderLeft: `6px solid ${task.done ? "#8bc34a" : borderColor}`,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+                  transition: "0.2s"
+                }}
+              >
+                <div style={{ flex: 1 }}>
+                  <strong>{task.title}</strong>
+                  <div style={{ fontSize: 12, marginTop: 4 }}>
+                    💰 +{task.coins} coins | ⭐ +{task.xp} XP
+                  </div>
+                </div>
+                <button
+                  onClick={() => toggleTask(task.id)}
+                  style={{
+                    alignSelf: "flex-start",
+                    border: "none",
+                    background: "transparent",
+                    fontSize: 18,
+                    cursor: "pointer",
+                    width: 30,
+                    padding: 4,
+                    color: "white",
+                    marginTop: 8
+                  }}
+                  onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
+                  onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
+                >
+                  {task.done ? "✅" : "⬜"}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
 	</>
   );
 }

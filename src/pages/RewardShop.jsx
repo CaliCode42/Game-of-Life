@@ -1,5 +1,6 @@
 import { useState } from "react";
 import rewardsData from "../data/rewards.json";
+import "../styles/RewardShop.css";
 
 export default function RewardShop({ coins, setCoins, totalXp }) {
   const [rewards] = useState(rewardsData);
@@ -49,14 +50,7 @@ export default function RewardShop({ coins, setCoins, totalXp }) {
       >
         <h2>Boutique</h2>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-            gap: 20,
-            justifyContent: "center" // centre les colonnes si l'écran est large
-          }}
-        >
+        <div className="reward-grid">
           {rewards.map((reward) => {
             const isLocked = level < reward.levelRequired;
             const canBuy = coins >= reward.cost && !isLocked;

@@ -1,0 +1,24 @@
+.reward-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 colonne sur mobile */
+  gap: 20px;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .reward-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+  }
+}
+
+@media (min-width: 1024px) {
+  .reward-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes sur PC moyen */
+  }
+}
+
+@media (min-width: 1200px) {
+  .reward-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes sur PC large */
+  }
+}
