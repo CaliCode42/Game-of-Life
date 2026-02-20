@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import objectives from "../data/objectives.json";
 
 export default function DailyTasks({
   coins,
@@ -9,13 +8,10 @@ export default function DailyTasks({
   streak,
   setStreak,
   bestStreak,
-  setBestStreak
+  setBestStreak,
+  tasks,
+  setTasks
 }) {
-
-  const [tasks, setTasks] = useState(() => {
-  const saved = localStorage.getItem("lifeRPG_tasks")
-  return saved ? JSON.parse(saved) : objectives
-})
 
 const today = new Date().toDateString()
 
@@ -43,7 +39,7 @@ const getStreakBonus = () => {
 }
   const xpPerLevel = 100;
   
-  // Calcul automatique du niveau
+  // Automatic calcul of the level
   const level = Math.floor(totalXp / xpPerLevel) + 1
   const currentXp = totalXp % xpPerLevel
 
@@ -94,17 +90,14 @@ return (
 	<div
 	  style={{
 		background: "#1e1e1e",
-		color: "white",
-		padding: 15,
+		color: "aqua",
+		fontWeight: "bold",
+		padding: 1,
 		borderRadius: 12,
-		marginBottom: 20
+		marginBottom: 5
 	  }}
 	>
-	  <h2>👤 Profil</h2>
-	  <p>🎖 Niveau : {level}</p>
-	  <p>💰 Coins : {coins}</p>
-	  <p>🔥 Streak : {streak}</p>
-	  <p>🏆 Record : {bestStreak}</p>
+	  <h2>🏅 Niveau : {level}</h2>
 	</div>
 
 	<div
@@ -148,8 +141,8 @@ return (
 			background: task.done ? "#6cb87d" : "#8b8383",
 			transition: "0.2s",
 			display: "flex",
-      		alignItems: "center",   // centre verticalement
-    		gap: 12                 // espace entre bouton et texte
+      		alignItems: "center",   // center vertically
+    		gap: 12                 // space between button and text
 			}}
 	  >
 	  <button
@@ -167,7 +160,7 @@ return (
 	  >
 		{task.done ? "✅" : "⬜"}
 	  </button>
-	    {task.title} (+{task.xp} XP)
+	    {task.title} ({task.xp} XP / {task.coins} coins)
 	  </div>
 	))}
 	</>

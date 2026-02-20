@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import DailyTasks from "./pages/DailyTasks"
 import RewardShop from "./pages/RewardShop"
+import objectives from "./data/objectives.json";
 
 function App() {
 
@@ -26,6 +27,12 @@ function App() {
     const saved = localStorage.getItem("lifeRPG_bestStreak")
     return saved ? Number(saved) : 0
   })
+
+  const [tasks, setTasks] = useState(objectives)
+//   const [tasks, setTasks] = useState(() => {
+//   const saved = localStorage.getItem("lifeRPG_tasks")
+//   return saved ? JSON.parse(saved) : objectives
+// })
 
   return (
     <Router>
@@ -55,6 +62,8 @@ function App() {
               setStreak={setStreak}
               bestStreak={bestStreak}
               setBestStreak={setBestStreak}
+			  tasks={tasks}
+			  setTasks={setTasks}
             />
           }
         />
