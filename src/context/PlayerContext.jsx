@@ -27,15 +27,17 @@ export const PlayerProvider = ({ children }) => {
       .from('user_data')
       .select('*')
       .eq('user_id', user.id)
-      .single();
+      .maybeSingle();
 
-    if (error && error.code !== 'PGRST116') { // PGRST116 is "not found"
+    if (error) {
       console.error('Error loading player data:', error);
     } else if (data) {
       setCoins(data.coins || 0);
       setTotalXp(data.total_xp || 0);
       setStreak(data.streak || 0);
       setBestStreak(data.best_streak || 0);
+    } else {
+      // No data, use defaults (already set)
     }
     setLoading(false);
   };
