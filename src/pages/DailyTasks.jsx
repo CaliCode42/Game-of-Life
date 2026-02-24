@@ -111,6 +111,57 @@ return (
         ✅ {tasks.filter(t => t.done).length} / {tasks.length} complétées
       </p>
 
+	  <div>
+        <h3>Quêtes principales</h3>
+        <div className="tasks-grid">
+          {tasks.filter(task => task.type === "big").map((task) => {
+            const borderColor = "#ff9800"; // orange for big
+            return (
+              <div
+                key={task.id}
+                style={{
+                  padding: 12,
+                  borderRadius: 10,
+                  background: task.done ? "#4caf50" : "#2a2a2a",
+                  color: "white",
+                  borderLeft: `6px solid ${task.done ? "#8bc34a" : borderColor}`,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+                  transition: "0.2s"
+                }}
+              >
+                <div style={{ flex: 1 }}>
+                  <strong>{task.title}</strong>
+                  <div style={{ fontSize: 12, marginTop: 4 }}>
+                    💰 +{task.coins} coins | ⭐ +{task.xp} XP
+                  </div>
+                </div>
+                <button
+                  onClick={() => toggleTask(task.id)}
+                  style={{
+                    alignSelf: "flex-start",
+                    border: "none",
+                    background: "transparent",
+                    fontSize: 18,
+                    cursor: "pointer",
+                    width: 30,
+                    padding: 4,
+                    color: "white",
+                    marginTop: 8
+                  }}
+                  onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
+                  onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
+                >
+                  {task.done ? "✅" : "⬜"}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       <div style={{ marginBottom: 30 }}>
         <h3>Quêtes secondaires</h3>
         <div className="tasks-grid">
@@ -162,56 +213,6 @@ return (
         </div>
       </div>
 
-      <div>
-        <h3>Quêtes principales</h3>
-        <div className="tasks-grid">
-          {tasks.filter(task => task.type === "big").map((task) => {
-            const borderColor = "#ff9800"; // orange for big
-            return (
-              <div
-                key={task.id}
-                style={{
-                  padding: 12,
-                  borderRadius: 10,
-                  background: task.done ? "#4caf50" : "#2a2a2a",
-                  color: "white",
-                  borderLeft: `6px solid ${task.done ? "#8bc34a" : borderColor}`,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-                  transition: "0.2s"
-                }}
-              >
-                <div style={{ flex: 1 }}>
-                  <strong>{task.title}</strong>
-                  <div style={{ fontSize: 12, marginTop: 4 }}>
-                    💰 +{task.coins} coins | ⭐ +{task.xp} XP
-                  </div>
-                </div>
-                <button
-                  onClick={() => toggleTask(task.id)}
-                  style={{
-                    alignSelf: "flex-start",
-                    border: "none",
-                    background: "transparent",
-                    fontSize: 18,
-                    cursor: "pointer",
-                    width: 30,
-                    padding: 4,
-                    color: "white",
-                    marginTop: 8
-                  }}
-                  onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
-                  onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
-                >
-                  {task.done ? "✅" : "⬜"}
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
     </div>
 	</>
   );
