@@ -112,7 +112,7 @@ return (
       </p>
 
       <div style={{ marginBottom: 30 }}>
-        <h3>Petites quêtes</h3>
+        <h3>Quêtes secondaires</h3>
         <div className="tasks-grid">
           {tasks.filter(task => task.type === "small").map((task) => {
             const borderColor = "#2196f3"; // blue for small
@@ -163,7 +163,7 @@ return (
       </div>
 
       <div>
-        <h3>Grandes quêtes</h3>
+        <h3>Quêtes principales</h3>
         <div className="tasks-grid">
           {tasks.filter(task => task.type === "big").map((task) => {
             const borderColor = "#ff9800"; // orange for big
