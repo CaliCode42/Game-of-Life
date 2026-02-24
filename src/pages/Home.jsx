@@ -1,28 +1,40 @@
 import { useNavigate } from "react-router-dom"
-import { supabase } from "../supabaseClient"
+import { useAuth } from "../context/AuthContext"
+import { usePlayer } from "../context/PlayerContext"
 
-export default function Home({ coins, setCoins, totalXp, streak, bestStreak }) {
+export default function Home() {
   const navigate = useNavigate()
+  const { signOut } = useAuth()
+  const { coins, totalXp, streak, bestStreak } = usePlayer()
 
   const xpPerLevel = 100;
   const level = Math.floor(totalXp / xpPerLevel) + 1;
-  const userId = "1";
 
-    useEffect(() => {
-    async function testDB() {
-      const { data, error } = await supabase
-        .from("users")
-        .select("*")
-
-      console.log("DB DATA:", data)
-      console.log("DB ERROR:", error)
-    }
-
-    testDB()
-  }, [])
+  const handleSignOut = async () => {
+    await signOut()
+    navigate('/')
+  }
 
   return (
     <div style={{ maxWidth: 500, margin: "auto" }}>
+      <button
+        onClick={handleSignOut}
+        style={{
+          position: "fixed",
+          top: 10,
+          right: 10,
+          padding: "8px 12px",
+          borderRadius: 4,
+          cursor: "pointer",
+          background: "#dc3545",
+          color: "white",
+          fontSize: 14,
+          border: "none",
+          zIndex: 1000
+        }}
+      >
+        Déconnexion
+      </button>
       <div
         style={{
           background: "#1e1e1e",
@@ -58,7 +70,8 @@ export default function Home({ coins, setCoins, totalXp, streak, bestStreak }) {
           width: "100%",
           padding: 10,
           borderRadius: 8,
-          cursor: "pointer"
+          cursor: "pointer",
+          marginBottom: 10
         }}
       >
         🛒 Boutique
