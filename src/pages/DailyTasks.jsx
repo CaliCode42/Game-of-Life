@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../styles/DailyTasks.css";
 
 export default function DailyTasks({
+  userId,
   coins,
   setCoins,
   totalXp,
@@ -56,9 +57,11 @@ const getStreakBonus = () => {
 		updateStreak()
         setTotalXp(prev => prev + task.xp)
 		setCoins(prev => prev + task.xp + bonus)
+		updatePlayer(userId, totalXp, coins)
       } else {
         setTotalXp(prev => Math.max(0, prev - task.xp))
 		setCoins(prev => Math.max(0, prev - task.xp - bonus))
+		updatePlayer(userId, totalXp, coins)
       }
 
       return { ...task, done: newDone }
@@ -85,6 +88,20 @@ const getStreakBonus = () => {
   localStorage.setItem("lifeRPG_streak", streak)
   localStorage.setItem("lifeRPG_bestStreak", bestStreak)
 }, [totalXp, coins, streak, bestStreak])
+
+  useEffect(() => {
+  async function updatePlayer(userId, newXp, newCoins) {
+  const { error } = await supabase
+  	.from("users")
+  	.update({
+  	total_xp: newXp,
+  	coins: newCoins
+  	})
+  	.eq("id", userId)
+
+  if (error) console.error(error)
+  }
+})
 
 return (
   <>

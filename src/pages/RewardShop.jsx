@@ -2,7 +2,7 @@ import { useState } from "react";
 import rewardsData from "../data/rewards.json";
 import "../styles/RewardShop.css";
 
-export default function RewardShop({ coins, setCoins, totalXp }) {
+export default function RewardShop({ userId, coins, setCoins, totalXp }) {
   const [rewards] = useState(rewardsData);
 
   const xpPerLevel = 100;
@@ -11,6 +11,7 @@ export default function RewardShop({ coins, setCoins, totalXp }) {
   const buyReward = (reward) => {
     if (coins >= reward.cost) {
       setCoins(prev => prev - reward.cost);
+	  updatePlayer(userId, totalXp, coins)
       alert(`🎉 Tu as acheté : ${reward.title}`);
     } else {
       alert("❌ Pas assez de coins !");
