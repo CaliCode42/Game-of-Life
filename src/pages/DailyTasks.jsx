@@ -64,9 +64,6 @@ export default function DailyTasks({ tasks, setTasks }) {
 
 return (
   <>
-  {/* <div style={{ maxWidth: 500, margin: "auto" }}>
-	
-	</div> */}
     <div
       style={{
         background: "#1e1e1e",
@@ -77,24 +74,6 @@ return (
         textAlign: "center"
       }}
     >
-		<button
-        onClick={handleSignOut}
-        style={{
-          position: "fixed",
-          top: 10,
-          right: 10,
-          padding: "8px 12px",
-          borderRadius: 4,
-          cursor: "pointer",
-          background: "#dc3545",
-          color: "white",
-          fontSize: 14,
-          border: "none",
-          zIndex: 1000
-        }}
-      >
-        Déconnexion
-      </button>
       <h2>🎖 Niveau : {level}</h2>
       <p>💰 Coins : {coins}</p>
       <div
