@@ -29,7 +29,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const signUp = async (email, password) => {
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const redirectTo = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : undefined);
+    const { data, error } = await supabase.auth.signUp(
+      { email, password },
+      // pass redirectTo so the confirmation link points to the correct site
+      redirectTo ? { redirectTo } : {}
+    );
     return { data, error };
   };
 

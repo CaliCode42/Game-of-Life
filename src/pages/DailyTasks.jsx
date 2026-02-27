@@ -64,6 +64,24 @@ export default function DailyTasks({ tasks, setTasks }) {
 
 return (
   <>
+  <button
+        onClick={handleSignOut}
+        style={{
+          position: "fixed",
+          top: 10,
+          right: 10,
+          padding: "8px 12px",
+          borderRadius: 4,
+          cursor: "pointer",
+          background: "#dc3545",
+          color: "white",
+          fontSize: 14,
+          border: "none",
+          zIndex: 1000
+        }}
+      >
+        Déconnexion
+      </button>
     <div
       style={{
         background: "#1e1e1e",
