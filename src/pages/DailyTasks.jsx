@@ -64,7 +64,7 @@ export default function DailyTasks({ tasks, setTasks }) {
 
 return (
   <>
-  <div style={{ maxWidth: 500, margin: "auto" }}>
+  {/* <div style={{ maxWidth: 500, margin: "auto" }}>
 	<button
         onClick={handleSignOut}
         style={{
@@ -83,7 +83,7 @@ return (
       >
         Déconnexion
       </button>
-	</div>
+	</div> */}
     <div
       style={{
         background: "#1e1e1e",
