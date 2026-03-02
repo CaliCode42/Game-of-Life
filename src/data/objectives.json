@@ -4,18 +4,4 @@
 	{ "id": 3, "title": "Courses", "type": "small", "xp": 0, "coins": 5 },
 	{ "id": 4, "title": "Planning", "type": "small", "xp": 0, "coins": 5 },
 	{ "id": 5, "title": "Update Game of Life", "type": "big", "xp": 20, "coins": 20 }
-	
-	// { "id": 1, "title": "Séance de travail (4h)", "type": "big", "xp": 20, "coins": 20 },
-	// { "id": 2, "title": "Finir CPP08", "type": "big", "xp": 20, "coins": 20 },
-	// { "id": 3, "title": "Valider CPP02", "type": "big", "xp": 20, "coins": 20 },
-	// { "id": 4, "title": "Valider CPP03", "type": "big", "xp": 20, "coins": 20 },
-	// { "id": 5, "title": "Valider CPP04", "type": "big", "xp": 20, "coins": 20 },
-	// { "id": 6, "title": "Récupérer point de correction", "type": "big", "xp": 20, "coins": 20 },
-	// { "id": 7, "title": "Sport", "type": "small", "xp": 0, "coins": 5 },
-	// { "id": 8, "title": "Lecture", "type": "small", "xp": 0, "coins": 5 },
-	// { "id": 9, "title": "Séance de travail (2h)", "type": "small", "xp": 5, "coins": 5 },
-	// { "id": 10, "title": "Ménage / rangement", "type": "small", "xp": 0, "coins": 5 },
-	// { "id": 11, "title": "Musique", "type": "small", "xp": 0, "coins": 5 },
-	// { "id": 12, "title": "Bonne action", "type": "small", "xp": 0, "coins": 5 },
-	// { "id": 13, "title": "Promener le chien", "type": "small", "xp": 0, "coins": 5 }
 ]
