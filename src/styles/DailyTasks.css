@@ -5,6 +5,35 @@
   justify-content: center;
 }
 
+/* simple form for adding a new task */
+.task-editor {
+  background: #2a2a2a;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.task-editor input,
+.task-editor select {
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: none;
+}
+
+.task-editor button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
 @media (min-width: 768px) {
   .tasks-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */

@@ -1,9 +1,25 @@
 import { useState, useEffect } from "react";
 import "../styles/DailyTasks.css";
 import { usePlayer } from "../context/PlayerContext";
+import { useTasks } from "../context/TasksContext";
 
-export default function DailyTasks({ tasks, setTasks }) {
+export default function DailyTasks() {
   const { coins, setCoins, totalXp, setTotalXp, streak, setStreak, bestStreak, setBestStreak } = usePlayer();
+  const { tasks, setTasks, addTask, removeTask, loading } = useTasks();
+  
+  // local state for new-task form
+  const [newTitle, setNewTitle] = useState("");
+  const [newType, setNewType] = useState("small");
+  const [newXp, setNewXp] = useState(0);
+  const [newCoins, setNewCoins] = useState(0);
+
+  const handleAdd = () => {
+    if (!newTitle.trim()) return;
+    addTask({ title: newTitle, type: newType, xp: Number(newXp), coins: Number(newCoins) });
+    setNewTitle("");
+    setNewXp(0);
+    setNewCoins(0);
+  };
 
   const today = new Date().toDateString();
   const yesterday = new Date(Date.now() - 86400000).toDateString();
@@ -62,8 +78,43 @@ export default function DailyTasks({ tasks, setTasks }) {
 
   // Removed localStorage saves as data is now in Supabase
 
+  // guard against tasks loading
+  if (loading) {
+    return <div>Chargement des quêtes...</div>;
+  }
+
 return (
   <>
+    {/* formulaire d'ajout */}
+    <div className="task-editor">
+      <h3>Ajouter une quête</h3>
+      <input
+        value={newTitle}
+        onChange={e => setNewTitle(e.target.value)}
+        placeholder="Titre"
+      />
+      <select
+        value={newType}
+        onChange={e => setNewType(e.target.value)}
+      >
+        <option value="small">Petit</option>
+        <option value="big">Grand</option>
+      </select>
+      <input
+        type="number"
+        value={newXp}
+        onChange={e => setNewXp(e.target.value)}
+        placeholder="XP"
+      />
+      <input
+        type="number"
+        value={newCoins}
+        onChange={e => setNewCoins(e.target.value)}
+        placeholder="Coins"
+      />
+      <button onClick={handleAdd}>Ajouter</button>
+    </div>
+
     <div
       style={{
         background: "#1e1e1e",
@@ -138,24 +189,44 @@ return (
                     💰 +{task.coins} coins | ⭐ +{task.xp} XP
                   </div>
                 </div>
-                <button
-                  onClick={() => toggleTask(task.id)}
-                  style={{
-                    alignSelf: "flex-start",
-                    border: "none",
-                    background: "transparent",
-                    fontSize: 18,
-                    cursor: "pointer",
-                    width: 30,
-                    padding: 4,
-                    color: "white",
-                    marginTop: 8
-                  }}
-                  onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
-                  onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
-                >
-                  {task.done ? "✅" : "⬜"}
-                </button>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button
+                    onClick={() => toggleTask(task.id)}
+                    style={{
+                      alignSelf: "flex-start",
+                      border: "none",
+                      background: "transparent",
+                      fontSize: 18,
+                      cursor: "pointer",
+                      width: 30,
+                      padding: 4,
+                      color: "white",
+                      marginTop: 8
+                    }}
+                    onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
+                    onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
+                  >
+                    {task.done ? "✅" : "⬜"}
+                  </button>
+                  <button
+                    onClick={() => removeTask(task.id)}
+                    style={{
+                      alignSelf: "flex-start",
+                      border: "none",
+                      background: "transparent",
+                      fontSize: 18,
+                      cursor: "pointer",
+                      width: 30,
+                      padding: 4,
+                      color: "white",
+                      marginTop: 8
+                    }}
+                    onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
+                    onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
+                  >
+                    🗑️
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -189,24 +260,44 @@ return (
                     💰 +{task.coins} coins | ⭐ +{task.xp} XP
                   </div>
                 </div>
-                <button
-                  onClick={() => toggleTask(task.id)}
-                  style={{
-                    alignSelf: "flex-start",
-                    border: "none",
-                    background: "transparent",
-                    fontSize: 18,
-                    cursor: "pointer",
-                    width: 30,
-                    padding: 4,
-                    color: "white",
-                    marginTop: 8
-                  }}
-                  onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
-                  onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
-                >
-                  {task.done ? "✅" : "⬜"}
-                </button>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button
+                    onClick={() => toggleTask(task.id)}
+                    style={{
+                      alignSelf: "flex-start",
+                      border: "none",
+                      background: "transparent",
+                      fontSize: 18,
+                      cursor: "pointer",
+                      width: 30,
+                      padding: 4,
+                      color: "white",
+                      marginTop: 8
+                    }}
+                    onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
+                    onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
+                  >
+                    {task.done ? "✅" : "⬜"}
+                  </button>
+                  <button
+                    onClick={() => removeTask(task.id)}
+                    style={{
+                      alignSelf: "flex-start",
+                      border: "none",
+                      background: "transparent",
+                      fontSize: 18,
+                      cursor: "pointer",
+                      width: 30,
+                      padding: 4,
+                      color: "white",
+                      marginTop: 8
+                    }}
+                    onMouseOver={e => e.currentTarget.style.transform = "scale(1.2)"}
+                    onMouseOut={e => e.currentTarget.style.transform = "scale(1)"}
+                  >
+                    🗑️
+                  </button>
+                </div>
               </div>
             );
           })}
