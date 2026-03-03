@@ -1,7 +1,7 @@
 [
-	{ "id": 1, "title": "Démonter meuble", "type": "small", "xp": 0, "coins": 5 },
-	{ "id": 2, "title": "Machine", "type": "small", "xp": 0, "coins": 5 },
-	{ "id": 3, "title": "Courses", "type": "small", "xp": 0, "coins": 5 },
-	{ "id": 4, "title": "Planning", "type": "small", "xp": 0, "coins": 5 },
+	{ "id": 1, "title": "Sortir Alma", "type": "small", "xp": 0, "coins": 5 },
+	{ "id": 2, "title": "Slots de correction", "type": "big", "xp": 20, "coins": 20 },
+	{ "id": 3, "title": "Valider CPP", "type": "big", "xp": 20, "coins": 20 },
+	{ "id": 4, "title": "Sport", "type": "small", "xp": 0, "coins": 5 },
 	{ "id": 5, "title": "Update Game of Life", "type": "big", "xp": 20, "coins": 20 }
 ]
