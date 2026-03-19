@@ -84,7 +84,7 @@ export default function DailyTasks() {
   }
 
 return (
-  <>
+  <div style={{ maxWidth: 1200, margin: "0 auto", padding: "20px" }}>
     {/* formulaire d'ajout */}
     <div className="task-editor">
       <h3>Ajouter une quête</h3>
@@ -305,6 +305,6 @@ return (
       </div>
 
     </div>
-	</>
+  </div>
   );
 }
