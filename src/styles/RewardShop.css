@@ -22,3 +22,19 @@
     grid-template-columns: repeat(4, 1fr); /* 4 colonnes sur PC large */
   }
 }
+
+.shop-wallet {
+  background: #1e1e1e;
+  color: aqua;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.shop-page {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}

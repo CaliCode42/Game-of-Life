@@ -1,0 +1,53 @@
+
+.reward-card {
+  padding: 12px;
+  border-radius: 10px;
+  background: #2a2a2a;
+  border-left: 6px solid var(--rarity-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.reward-card--locked {
+  opacity: 0.5;
+}
+
+.reward-title {
+  color: var(--rarity-color);
+}
+
+.reward-cost {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.reward-rarity {
+  font-size: 12px;
+}
+
+.reward-requirement {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.reward-buy-button {
+  margin-top: 8px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.reward-buy-button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.reward-buy-button:not(:disabled):hover {
+  transform: scale(1.05);
+}

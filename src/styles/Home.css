@@ -1,0 +1,26 @@
+.home-page {
+  max-width: 500px;
+  margin: auto;
+}
+
+.home-navigation-button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.logout-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #dc3545;
+  color: white;
+  font-size: 14px;
+  border: none;
+  z-index: 1000;
+}

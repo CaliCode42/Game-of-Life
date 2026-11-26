@@ -1,0 +1,55 @@
+
+.quest-card {
+  padding: 12px;
+  border-radius: 10px;
+  background: #2a2a2a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+}
+
+.quest-card--big {
+  border-left: 6px solid #ff9800;
+}
+
+.quest-card--small {
+  border-left: 6px solid #2196f3;
+}
+
+.quest-card--done {
+  background: #4caf50;
+  border-left: 6px solid #8bc34a;
+}
+
+.quest-content {
+  flex: 1;
+}
+
+.quest-rewards {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.quest-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.quest-action-button {
+  align-self: flex-start;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  width: 30px;
+  padding: 4px;
+  color: white;
+  margin-top: 8px;
+}
+
+.quest-action-button:hover {
+  transform: scale(1.2);
+}
