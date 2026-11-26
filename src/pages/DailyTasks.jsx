@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 import "../styles/DailyTasks.css";
 import { usePlayer } from "../context/PlayerContext";
 import { useTasks } from "../context/TasksContext";
+import { XP_PER_LEVEL } from "../config/gameConfig";
+import {
+  getLevel,
+  getCurrentXp,
+  getXpProgress,
+  getStreakBonus,
+} from "../utils/progression";
 
 export default function DailyTasks() {
   const { coins, setCoins, totalXp, setTotalXp, streak, setStreak, bestStreak, setBestStreak } = usePlayer();
@@ -21,9 +28,6 @@ export default function DailyTasks() {
     setNewCoins(0);
   };
 
-  const today = new Date().toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-
   const updateStreak = () => {
     // Note: For simplicity, assuming streak is updated daily. In a real app, track last active date in DB.
     // For now, we'll update streak on task completion if not already done today.
@@ -31,16 +35,8 @@ export default function DailyTasks() {
     setStreak(prev => prev + 1);
   };
 
-  const getStreakBonus = () => {
-    if (streak >= 7) return 3;
-    if (streak >= 5) return 2;
-    if (streak >= 3) return 1;
-    return 0;
-  };
-
-  const xpPerLevel = 100;
-  const level = Math.floor(totalXp / xpPerLevel) + 1;
-  const currentXp = totalXp % xpPerLevel;
+  const level = getLevel(totalXp);
+  const currentXp = getCurrentXp(totalXp);
 
   const toggleTask = (id) => {
     setTasks(prevTasks =>
@@ -48,7 +44,7 @@ export default function DailyTasks() {
         if (task.id !== id) return task;
 
         const newDone = !task.done;
-        const bonus = getStreakBonus();
+        const bonus = getStreakBonus(streak);
 
         if (newDone) {
           updateStreak();
@@ -139,14 +135,14 @@ return (
         <div
           style={{
             height: "100%",
-            width: `${(currentXp / xpPerLevel) * 100}%`,
+            width: `${getXpProgress(totalXp)}%`,
             background: "linear-gradient(90deg, #4caf50, #8bc34a)",
             transition: "0.4s"
           }}
         />
       </div>
       <p style={{ fontWeight: "bold", marginTop: 5 }}>
-        XP : {currentXp} / {xpPerLevel}
+        XP : {currentXp} / {XP_PER_LEVEL}
       </p>
     </div>
     <div style={{ marginTop: 30 }}>

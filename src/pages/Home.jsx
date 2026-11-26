@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { usePlayer } from "../context/PlayerContext"
+import { getLevel } from "../utils/progression";
 
 export default function Home() {
   const navigate = useNavigate()
   const { signOut } = useAuth()
   const { coins, totalXp, streak, bestStreak } = usePlayer()
 
-  const xpPerLevel = 100;
-  const level = Math.floor(totalXp / xpPerLevel) + 1;
+  const level = getLevel(totalXp);
 
   const handleSignOut = async () => {
     await signOut()

@@ -2,13 +2,14 @@ import { useState } from "react";
 import rewardsData from "../data/rewards.json";
 import "../styles/RewardShop.css";
 import { usePlayer } from "../context/PlayerContext";
+import { getLevel } from "../utils/progression";
+import { RARITY_COLORS } from "../config/gameConfig";
 
 export default function RewardShop() {
   const { coins, setCoins, totalXp } = usePlayer();
   const [rewards] = useState(rewardsData);
 
-  const xpPerLevel = 100;
-  const level = Math.floor(totalXp / xpPerLevel) + 1;
+  const level = getLevel(totalXp);
 
   const buyReward = (reward) => {
     if (coins >= reward.cost) {
@@ -17,14 +18,6 @@ export default function RewardShop() {
     } else {
       alert("❌ Pas assez de coins !");
     }
-  };
-
-  const rarityColors = {
-    common: "#b0b0b0",
-    uncommon: "#4caf50",
-    rare: "#2196f3",
-    epic: "#9c27b0",
-    legendary: "#ff9800"
   };
 
   return (
@@ -64,7 +57,7 @@ export default function RewardShop() {
                   padding: 12,
                   borderRadius: 10,
                   background: "#2a2a2a",
-                  borderLeft: `6px solid ${rarityColors[reward.rarity]}`,
+                  borderLeft: `6px solid ${RARITY_COLORS[reward.rarity]}`,
                   opacity: isLocked ? 0.5 : 1,
                   display: "flex",
                   flexDirection: "column",
@@ -72,7 +65,7 @@ export default function RewardShop() {
                   boxShadow: "0 4px 10px rgba(0,0,0,0.3)"
                 }}
               >
-                <strong style={{ color: rarityColors[reward.rarity] }}>
+                <strong style={{ color: RARITY_COLORS[reward.rarity] }}>
                   {reward.title}
                 </strong>
 
